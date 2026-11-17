@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>Connexion à Clipper</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<main class="doc" style="text-align:center">
+  <h1 style="text-align:center">Retour vers Clipper…</h1>
+  <p id="msg">Clipper doit être lancé sur cet ordinateur.</p>
+  <p><a class="btn" id="go" href="#">Ouvrir Clipper</a></p>
+</main>
+<script>
+  // Relais https : renvoie la réponse de connexion (code + state) vers Clipper sur cet ordinateur.
+  const m = location.pathname.match(/^\/oauth\/(tiktok|instagram|youtube)\/callback\/?$/);
+  const target = m ? `http://localhost:7860/oauth/${m[1]}/callback${location.search}` : "http://localhost:7860/";
+  document.getElementById("go").href = target;
+  if (!m) document.getElementById("msg").textContent = "Adresse de connexion inconnue.";
+  else location.replace(target);
+</script>
+</body>
+</html>

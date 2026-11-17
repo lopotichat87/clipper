@@ -1,0 +1,13 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/oauth/:provider/callback", "destination": "/relay" }
+  ],
+  "headers": [
+    { "source": "/icon.png", "headers": [{ "key": "Access-Control-Allow-Origin", "value": "*" }] },
+    { "source": "/(.*)", "headers": [
+      { "key": "X-Content-Type-Options", "value": "nosniff" },
+      { "key": "Referrer-Policy", "value": "no-referrer" }
+    ] }
+  ]
+}

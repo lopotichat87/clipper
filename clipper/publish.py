@@ -28,6 +28,9 @@ PORT = 7860
 LOCK = threading.RLock()
 GRAPH = "https://graph.facebook.com/v27.0"   # API Meta (Instagram via connexion Facebook)
 NETWORKS = ("youtube", "tiktok", "instagram")
+# Relais https (site Vercel) : TikTok et Meta exigent une adresse de retour https ;
+# la page renvoie ensuite vers Clipper sur cet ordinateur (localhost:7860).
+RELAY = os.environ.get("CLIPPER_RELAY", "https://clipper-autopost.vercel.app")
 
 
 def _read(name: str, default):
@@ -63,14 +66,14 @@ PROVIDERS = {
         "auth_url": "https://www.tiktok.com/v2/auth/authorize/",
         "token_url": "https://open.tiktokapis.com/v2/oauth/token/",
         "scopes": "user.info.basic,video.publish",
-        "default_redirect": f"http://localhost:{PORT}/oauth/tiktok/callback",
+        "default_redirect": f"{RELAY}/oauth/tiktok/callback",
     },
     "instagram": {
         "label": "Instagram",
         "auth_url": "https://www.facebook.com/v27.0/dialog/oauth",
         "token_url": f"{GRAPH}/oauth/access_token",
         "scopes": "instagram_basic,instagram_content_publish,pages_show_list,pages_read_engagement,business_management",
-        "default_redirect": f"http://localhost:{PORT}/oauth/instagram/callback",
+        "default_redirect": f"{RELAY}/oauth/instagram/callback",
     },
 }
 
