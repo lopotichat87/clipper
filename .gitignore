@@ -1,0 +1,16 @@
+# Environnement Python
+.venv/
+__pycache__/
+*.pyc
+
+# Données locales (vidéos téléchargées, clips générés, journaux)
+travail/
+clips/
+logs/
+
+# Clés d'API, jetons de connexion, file de publication : ne jamais publier
+config/
+.env
+.env.*
+
+.DS_Store
